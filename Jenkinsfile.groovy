@@ -5,10 +5,12 @@ node (
        // Bellow line triggers this job every minute
        pipelineTriggers{[cron('* * * * *')]} 
       ]}
+stage("Pull Repo"){
+    git 'https://github.com/Aizirek-1992/jenkins-pipelines.git'
+ 
 
 
-   stage("Stage1"){
-       echo "hello" 
+
 } 
    stage("Stage2"){ 
        echo "hello" 
