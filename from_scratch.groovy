@@ -1,5 +1,5 @@
 node {
-	properties([
+        properties([
 		// Below line sets "Discard Builds more than 5"
 		buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')), 
 		disableConcurrentBuilds(),
