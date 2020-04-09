@@ -1,6 +1,9 @@
 node {
-properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')),
- pipelineTriggers([cron('* * * * *')])])
+properties([
+	// Bellow line sets "Discard Builds more than 5"
+	buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')),
+    // Bellow line triggers this job every minute
+	pipelineTriggers([cron('* * * * *')])])
 
     stage("Stage1"){
 		echo "hello"
