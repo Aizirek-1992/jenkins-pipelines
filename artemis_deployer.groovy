@@ -7,15 +7,21 @@ node {
 		'version/0.2', 
 		'version/0.3', 
 		'version/0.4', 
-		'version/0.5'], 
+		'version/0.5',
+		'version/0.6',
+		'version/0.7',
+		'version/0.8',
+		'version/0.9',
+		'version/0.10',
+		], 
 	description: 'Which version of the app should I deploy? ', 
 	name: 'Version'), 
 	choice(choices: 
 	[
-		'dev1.aizirek.org', 
-		'qa1.aizirek.org', 
-		'stage1.aizirek.org', 
-		'prod1.aizirek.org'], 
+		'dev1.acirrustech.com', 
+		'qa1.acirrustech.com', 
+		'stage1.acirrustech.com', 
+		'prod1.acirrustech.com'], 
 	description: 'Please provide an environment to build the application', 
 	name: 'ENVIR')])])
 	stage("Stage1"){
@@ -62,4 +68,3 @@ node {
 			}
 		}
 	}
-}
