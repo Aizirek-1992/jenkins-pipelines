@@ -12,15 +12,15 @@ node {
 		name: 'Version'), 
 			choice(choices: 
 			[
-			'dev.acirrustech.com', 
-			'qa.acirrustech.com', 
-			'stage.acirrustech.com', 
-			'prod.acirrustech.com'], 
+		    'dev1.aizirek.org', 
+			'qa1.aizirek.org', 
+			'stage1.aizirek.org', 
+			'prod1.aizirek.org'],
 	description: 'Please provide an environment to build the application', 
 		name: 'Environment')])])
 	stage("Stage2"){
 		timestamps {
-			git 'https://github.com/farrukh90/packer.git'
+			git 'https://github.com/Aizirek-1992/jenkins-pipelines.git'
 	}
 }
 	stage("Stage2"){
@@ -55,4 +55,3 @@ node {
 		}
 	}
 }
-© 2020 GitHub, Inc.

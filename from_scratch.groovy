@@ -8,10 +8,10 @@ node {
 		parameters([
 			// Asks for Environment to Build
 			choice(choices: [
-			'dev1.acirrustech.com', 
-			'qa1.acirrustech.com', 
-			'stage1.acirrustech.com', 
-			'prod1.acirrustech.com'], 
+			'dev1.aizirek.org', 
+			'qa1.aizirek.org', 
+			'stage1.aizirek.org', 
+			'prod1.aizirek.org'], 
 			description: 'Please choose an environment', 
 			name: 'ENVIR'),
 
@@ -37,7 +37,7 @@ node {
 
 		// Pulls a repo from developer
 	stage("Pull Repo"){
-		checkout([$class: 'GitSCM', branches: [[name: '*/FarrukH']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/farrukh90/cool_website.git']]])
+		checkout([$class: 'GitSCM', branches: [[name: '*/Aizirek']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/farrukh90/cool_website.git']]])
 	}
 		//Installs web server on different environment
 	stage("Install Prerequisites"){

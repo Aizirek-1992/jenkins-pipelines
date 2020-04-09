@@ -8,7 +8,7 @@ properties(
         ])
     ]) 
 	stage("Stage2"){
-		git 'https://github.com/farrukh90/packer.git'
+		git 'https://github.com/Aizirek-1992/jenkins-pipelines.git'
 }
 	stage("Stage2"){
 		echo "hello"
