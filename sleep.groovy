@@ -13,5 +13,12 @@ node {
 } 
     stage("Script"){ 
         echo "hello" 
+    
+    
+    
+    
+    
+    
+    
     } 
 } 
