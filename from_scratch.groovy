@@ -2,70 +2,34 @@ node {
 	properties([
 		// Below line sets "Discard Builds more than 5"
 		buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')), 
-		disableConcurrentBuilds(),
+		
 		// Below line triggers this job every minute
-		pipelineTriggers([pollSCM('* * * * *')]),
-		parameters([
-			// Asks for Environment to Build
-			choice(choices: [
-			'dev1.aizirek.org', 
-			'qa1.aizirek.org', 
-			'stage1.aizirek.org', 
-			'prod1.aizirek.org'], 
-			description: 'Please choose an environment', 
-			name: 'ENVIR'),
-
-			// Asks for version
-			choice(choices: [
-				'v0.1', 
-				'v0.2', 
-				'v0.3', 
-				'v0.4', 
-				'v0.5'
-				], 
-			description: 'Which version should we deploy?', 
-			name: 'Version'),
-
-
-			// Asks for an input
-			string(defaultValue: 'v1', 
-			description: 'Please enter version number', 
-			name: 'APP_VERSION', 
-			trim: true)
-			])
-		])
-
-		// Pulls a repo from developer
-	stage("Pull Repo"){
-		checkout([$class: 'GitSCM', branches: [[name: '*/Aizirek']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/farrukh90/cool_website.git']]])
+		pipelineTriggers([pollSCM('* * * * *')])
+	    ])
+    stage("Pull Repo"){
+        git 'https://github.com/farrukh90/cool_website.git'
 	}
-		//Installs web server on different environment
 	stage("Install Prerequisites"){
 		sh """
-		ssh centos@${ENVIR}                 sudo yum install httpd -y
+		shh centos@dev1.aizirek.org       sudo yum install -y
 		"""
 	}
-		//Copies over developers files to different environment
 	stage("Copy artifacts"){
 		sh """
-		scp -r *  centos@${ENVIR}:/tmp
-		ssh centos@${ENVIR}                 sudo cp -r /tmp/index.html /var/www/html/
-		ssh centos@${ENVIR}                 sudo cp -r /tmp/style.css /var/www/html/
-		ssh centos@${ENVIR}				    sudo chown centos:centos /var/www/html/
-		ssh centos@${ENVIR}				    sudo chmod 777 /var/www/html/*
+		scp -r * centos@dev1.aizirek.org:/tmp
+		ssh centos@dev1.aizirek.org    sudo cp -r /tmp/index.html /var/www/html/
+		ssh centos@dev1.aizirek.org    sudo cp -r /tmp/style.css /var/www/html/
+		ssh centos@dev1.aizirek.org    sudo chown centos:centos /var/www/html/
+		ssh centos@dev1.aizirek.org     sudo chmod 777 /var/www/html/*
 		"""
 	}
-		//Restarts web server
-	stage("Restart web server"){
-		ws("tmp/") {
-			sh "ssh centos@${ENVIR}               sudo systemctl restart httpd"
-		}
+    stage("Restart web server"){
+		sh "ssh centos@dev1.aizirek.org    sudo systemctl restart httpd"
+	}
+	
+	stage("Slack"){
+		slackSend color: '#BADA55', message: 'Hello, World'
 	}
 
-		//Sends a message to slack
-	stage("Slack"){
-		ws("mnt/"){
-			slackSend color: '#BADA55', message: 'Hello, World!'
-		}
-	}
 }
+			
