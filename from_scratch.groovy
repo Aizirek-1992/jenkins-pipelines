@@ -1,5 +1,4 @@
 node {
-c
     stage("Stage1"){
 		echo "hello"
 }
