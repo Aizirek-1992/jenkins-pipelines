@@ -7,7 +7,7 @@ node {
 		pipelineTriggers([pollSCM('* * * * *')])
 	    ])
     stage("Pull Repo"){
-        git 'https://github.com/farrukh90/cool_website.git'
+        git 'https://github.com/Aizirek-1992/jenkins-pipelines.git://github.com/farrukh90/cool_website.git'
 	}
 	stage("Install Prerequisites"){
 		sh """
