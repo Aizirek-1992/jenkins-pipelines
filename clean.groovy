@@ -1,6 +1,6 @@
 node {
 	stage("Stage1"){
-		git 'https://github.com/Aizirek-1992/jenkins-pipelines.git'
+		git 'https://github.com/farrukh90/packer.git'
 }
 	stage("Stage2"){
 		echo "hello"
