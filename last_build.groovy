@@ -8,7 +8,8 @@ node {
             // Execute every minute
             cron('* * * * *')
             ])
-
+	]}
+	
 	stage("Stage1"){
 		git 'https://github.com/Aizirek-1992/jenkins-pipelines.git'
 }
